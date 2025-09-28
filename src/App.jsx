@@ -12,6 +12,9 @@ import CategoryProducts from './pages/CategoryProducts'
 import CartPage from './pages/Cartpage'
 import OrderConfirmationPage from './pages/OrderConfirmationPage'
 import CheckoutPage from './pages/CheckoutPage'
+import MyAccount from './pages/MyAccount'
+import Addresses from './pages/Addresses'
+import AddressPage from './pages/AddressPage'
 
 function App() {
   return (
@@ -33,6 +36,9 @@ function App() {
 <Route path="/cart" element={<CartPage />} />
 <Route path="/checkout" element={<CheckoutPage />} />
 <Route path="/order/:orderId" element={<OrderConfirmationPage />} />
+ <Route path="/account" element={<MyAccount />} />
+  <Route path="/account/addresses" element={<Addresses />} />
+  <Route path="/account/addresses" element={<AddressPage />} />
 
 
       </Routes>

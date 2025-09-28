@@ -197,17 +197,33 @@ const navigate = useNavigate();
           {/* Auth (Desktop) */}
           <div className="flex gap-4 items-center">
             {token ? (
-              <div className="hidden md:flex items-center gap-6 flex-1 justify-end">
-                <span className="ml-4 font-bold capitalize flex gap-2 justify-center items-center">
-                  <UserCircle size={24} /> Hi {username}
-                </span>
-                <button
-                  onClick={handleLogout}
-                  className="hover:text-gray-700 cursor-pointer hover:bg-white border border-gray-200 py-1 px-3 rounded-md shadow flex items-center justify-center"
-                >
-                  Logout
-                </button>
-              </div>
+                 <div className="hidden md:flex items-center gap-6 flex-1 justify-end relative group">
+                  <span className="ml-4 font-bold capitalize flex gap-2 items-center cursor-pointer">
+                    <UserCircle size={24} /> Hi {username}
+                  </span>
+
+                  {/* My Account Dropdown */}
+                  <div className="absolute top-full right-0 bg-white border shadow-md rounded-md w-40 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
+                    <Link
+                      to="/account"
+                      className="block px-4 py-2 hover:bg-gray-100 text-sm"
+                    >
+                      My Account
+                    </Link>
+                    <Link
+                      to="/account/addresses"
+                      className="block px-4 py-2 hover:bg-gray-100 text-sm"
+                    >
+                      Saved Addresses
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-sm text-red-600"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                </div>
             ) : (
               <div className="hidden md:flex items-center gap-6 flex-1 justify-end">
                 <Link to="/login" className="hover:text-rose-600">

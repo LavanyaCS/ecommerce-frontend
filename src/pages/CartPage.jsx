@@ -20,7 +20,7 @@ function CartPage() {
         });
         setCart(res.data.cart);
       } catch (err) {
-        console.error(err);
+        console.error(err.message);
         toast.error("Failed to fetch cart");
       }
     };
