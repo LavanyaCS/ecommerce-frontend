@@ -13,8 +13,9 @@ import CartPage from './pages/CartPage'
 import OrderConfirmationPage from './pages/OrderConfirmationPage'
 import CheckoutPage from './pages/CheckoutPage'
 import MyAccount from './pages/MyAccount'
-import Addresses from './pages/Addresses'
 import AddressPage from './pages/AddressPage'
+import OrderPage from './pages/OrderPage'
+import OrderDetailPage from './pages/OrderDetailPage'
 
 function App() {
   return (
@@ -35,10 +36,10 @@ function App() {
         <Route path="/my-wishlist" element={<Wishlist />}></Route>
 <Route path="/cart" element={<CartPage />} />
 <Route path="/checkout" element={<CheckoutPage />} />
-<Route path="/order/:orderId" element={<OrderConfirmationPage />} />
+<Route path="/order/:orderId" element={<OrderDetailPage />} />
  <Route path="/account" element={<MyAccount />} />
-  <Route path="/account/addresses" element={<Addresses />} />
   <Route path="/account/addresses" element={<AddressPage />} />
+  <Route path="/myorders" element={<OrderPage />} />
 
 
       </Routes>

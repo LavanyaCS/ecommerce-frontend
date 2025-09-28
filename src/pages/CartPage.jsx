@@ -135,7 +135,7 @@ function CartPage() {
                 </div>
                 <button
                   onClick={() => navigate("/checkout")}
-                  className={`bg-green-600 text-white px-4 py-2 rounded ${
+                  className={`bg-green-600 text-white px-4 py-2 rounded cursor-pointer ${
                     cartItems.length === 0
                       ? "opacity-50 cursor-not-allowed"
                       : ""

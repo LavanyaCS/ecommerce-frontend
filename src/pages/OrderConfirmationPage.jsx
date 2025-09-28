@@ -35,7 +35,7 @@ function OrderConfirmationPage() {
       <h3 className="font-semibold mt-4">Items:</h3>
       {order.orderItems.map((item) => (
         <div key={item.product._id} className="flex justify-between mb-2">
-          <span>{item.product.title} x {item.quantity}</span>
+          <span>{item.title} x {item.quantity}</span>
           <span>${item.price * item.quantity}</span>
         </div>
       ))}
@@ -44,7 +44,7 @@ function OrderConfirmationPage() {
       <div>
         <p>{order.shippingAddress.name}</p>
         <p>{order.shippingAddress.address}, {order.shippingAddress.city}</p>
-        <p>{order.shippingAddress.state} - {order.shippingAddress.zip}</p>
+        <p>{order.shippingAddress.state} - {order.shippipngAddress.zip}</p>
         <p>Phone: {order.shippingAddress.phone}</p>
       </div>
     </div>

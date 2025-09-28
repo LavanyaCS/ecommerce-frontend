@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { baseUrl } from "../api";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom"; // For redirecting to login
+import { useNavigate } from "react-router-dom";
 
 function AddressPage() {
   const [addresses, setAddresses] = useState([]);
@@ -15,11 +15,11 @@ function AddressPage() {
     country: "",
     isDefault: false,
   });
+  const [editingId, setEditingId] = useState(null); // Tracks which address is being edited
 
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
-  // Helper to get auth headers or redirect if missing
   const getAuthHeaders = () => {
     if (!token) {
       toast.error("Please login to manage addresses");
@@ -53,14 +53,23 @@ function AddressPage() {
     }));
   };
 
+  // Add or update address
   const handleSubmit = async (e) => {
     e.preventDefault();
     const headers = getAuthHeaders();
     if (!headers) return;
 
     try {
-      await axios.post(`${baseUrl}/address`, form, { headers });
-      toast.success("Address added");
+      if (editingId) {
+        // Update existing address
+        await axios.put(`${baseUrl}/address/${editingId}`, form, { headers });
+        toast.success("Address updated");
+        setEditingId(null);
+      } else {
+        // Add new address
+        await axios.post(`${baseUrl}/address`, form, { headers });
+        toast.success("Address added");
+      }
       setForm({
         label: "",
         street: "",
@@ -77,7 +86,7 @@ function AddressPage() {
         localStorage.removeItem("token");
         navigate("/login");
       } else {
-        toast.error("Failed to add address");
+        toast.error("Failed to save address");
       }
     }
   };
@@ -108,11 +117,37 @@ function AddressPage() {
     }
   };
 
+  const handleEdit = (address) => {
+    setForm({
+      label: address.label,
+      street: address.street,
+      city: address.city,
+      state: address.state,
+      zip: address.zip,
+      country: address.country,
+      isDefault: address.isDefault,
+    });
+    setEditingId(address._id);
+  };
+
+  const handleCancelEdit = () => {
+    setForm({
+      label: "",
+      street: "",
+      city: "",
+      state: "",
+      zip: "",
+      country: "",
+      isDefault: false,
+    });
+    setEditingId(null);
+  };
+
   return (
     <div className="max-w-3xl mx-auto p-4">
       <h2 className="text-xl font-bold mb-4">My Saved Addresses</h2>
 
-      {/* Add New Address */}
+      {/* Add / Edit Address Form */}
       <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4 mb-6">
         <input
           name="label"
@@ -168,12 +203,23 @@ function AddressPage() {
           />
           Set as default address
         </label>
-        <button
-          type="submit"
-          className="col-span-2 bg-primary text-white py-2 rounded"
-        >
-          Add Address
-        </button>
+        <div className="col-span-2 flex gap-2">
+          <button
+            type="submit"
+            className="bg-primary cursor-pointer  text-white py-2 rounded flex-1"
+          >
+            {editingId ? "Update Address" : "Add Address"}
+          </button>
+          {editingId && (
+            <button
+              type="button"
+              onClick={handleCancelEdit}
+              className="bg-gray-300 cursor-pointer  text-black py-2 rounded flex-1"
+            >
+              Cancel
+            </button>
+          )}
+        </div>
       </form>
 
       {/* Saved Addresses */}
@@ -201,14 +247,20 @@ function AddressPage() {
                 {!addr.isDefault && (
                   <button
                     onClick={() => setDefault(addr._id)}
-                    className="text-blue-600 text-sm hover:underline"
+                    className="text-blue-600 text-sm hover:font-semibold cursor-pointer  bg-white p-2 rounded shadow"
                   >
                     Set Default
                   </button>
                 )}
                 <button
+                  onClick={() => handleEdit(addr)}
+                  className="cursor-pointer text-yellow-600 text-sm hover:font-semibold bg-white p-2 rounded shadow"
+                >
+                  Edit
+                </button>
+                <button
                   onClick={() => handleDelete(addr._id)}
-                  className="text-red-600 text-sm hover:underline"
+                  className="cursor-pointer text-red-600 text-sm hover:font-semibold  bg-white p-2 rounded shadow"
                 >
                   Delete
                 </button>
