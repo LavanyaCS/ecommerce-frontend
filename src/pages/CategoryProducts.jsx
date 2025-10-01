@@ -36,7 +36,10 @@ function CategoryProducts() {
                        products.map((product) => (
              <div key={product._id} className="max-w-xs bg-white border border-gray-200 rounded-lg shadow hover:shadow-lg transition">
        {/* <!-- Product Image --> */}
-       <img className="p-4 rounded-t-lg" src={product.image[0]} alt={product.title} />
+     <Link 
+                       to={`/product/${product._id}`}
+                       >
+                         <img className="p-4 rounded-t-lg" src={product.image[0]} alt={product.title} />
      
        {/* <!-- Product Info --> */}
        <div className="px-5 pb-5 text-center">
@@ -46,7 +49,7 @@ function CategoryProducts() {
            <span className="ml-2 text-sm line-through text-gray-500">{product.quantity}</span>
          </div>
        </div>
-     
+     </Link>
        {/* <!-- Action Buttons --> */}
      <div className="grid grid-cols-2 divide-x border-t">
        {/* View Detail */}

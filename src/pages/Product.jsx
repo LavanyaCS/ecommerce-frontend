@@ -56,6 +56,9 @@ function Product() {
               key={product._id}
               className="max-w-xs bg-white border border-gray-200 rounded-lg shadow hover:shadow-lg transition"
             >
+              <Link 
+                                to={`/product/${product._id}`}
+                                >
               {/* Product Image */}
               <img
                 className="p-4 rounded-t-lg"
@@ -72,7 +75,7 @@ function Product() {
                     {product.quantity}
                   </span>
                 </div>
-              </div>
+              </div></Link>
 
               {/* Action Buttons */}
               <div className="grid grid-cols-2 divide-x border-t">

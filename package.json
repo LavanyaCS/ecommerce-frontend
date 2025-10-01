@@ -23,6 +23,7 @@
     "react-rating-stars-component": "^2.2.0",
     "react-router-dom": "^7.9.1",
     "react-stars": "^2.2.5",
+    "recharts": "^3.2.1",
     "tailwindcss": "^4.1.13"
   },
   "devDependencies": {

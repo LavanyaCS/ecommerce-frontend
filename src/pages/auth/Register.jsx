@@ -30,15 +30,14 @@ function Register() {
       console.log(res.data);
       toast.success("Logged Successfully");
       localStorage.setItem("token", res.data.token);
-      const decode = jwtDecode(res.data.token);
+      const decoded = jwtDecode(res.data.token);
       
       setregisterForm({email:"",username:"",role:"",password:""});
-      if (decode.role === 'admin' || decode.role === 'seller') {
-        navigate("/dashboard")
-      }
-      else {
-        navigate("/")
-      }
+        // const decoded = jwtDecode(res.data.token);
+      if (decoded.role === "admin") navigate("/admin/dashboard");
+      else if (decoded.role === "seller") navigate("/seller/dashboard");
+      else navigate("/");
+      
 
     }
     catch (error) {

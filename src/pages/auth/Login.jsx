@@ -30,13 +30,17 @@ function Login() {
       console.log(res.data);
       toast.success("Logged Successfully");
       localStorage.setItem("token", res.data.token);
-      const decode = jwtDecode(res.data.token);
-      if (decode.role === 'admin' || decode.role === 'seller') {
-        navigate("/dashboard")
-      }
-      else {
-        navigate("/")
-      }
+      const decoded = jwtDecode(res.data.token);
+if (decoded.role === "admin") navigate("/admin/dashboard");
+else if (decoded.role === "seller") navigate("/seller/dashboard");
+else navigate("/");
+
+// if (decode.role === 'admin' || decode.role === 'seller') {
+//         navigate("/dashboard")
+//       }
+//       else {
+//         navigate("/")
+//       }
 
     }
     catch (error) {

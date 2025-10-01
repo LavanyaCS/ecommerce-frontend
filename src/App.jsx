@@ -16,6 +16,8 @@ import MyAccount from './pages/MyAccount'
 import AddressPage from './pages/AddressPage'
 import OrderPage from './pages/OrderPage'
 import OrderDetailPage from './pages/OrderDetailPage'
+import SellerDashboard from './pages/SellerDashboard'
+import AdminDashboard from './pages/AdminDashboard'
 
 function App() {
   return (
@@ -28,6 +30,10 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
+          {/* Dashboards */}
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/seller/dashboard" element={<SellerDashboard />} />
+
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/product" element={<Product />}></Route>
         <Route path="/product/:id" element={<ProductDetail />}></Route>
