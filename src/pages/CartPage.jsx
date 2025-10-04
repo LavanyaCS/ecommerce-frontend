@@ -77,7 +77,7 @@ function CartPage() {
   const cartItems = cart.items.filter((item) => item.product);
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-6">
+    <div className="max-w-5xl mx-auto p-6 space-y-6">
       <h2 className="text-2xl font-bold">Your Cart</h2>
 
       <div className="bg-white shadow rounded p-6 space-y-4">
@@ -113,7 +113,7 @@ function CartPage() {
                   <button
                     onClick={() => handleRemove(item.product._id)}
                     title="Remove Product"
-                    className="text-red-600 hover:underline p-2 bg-white shadow rounded-full"
+                    className="text-gray-900 hover:underline p-2 bg-white shadow rounded-full"
                   >
                     <X size={14} />
                   </button>
@@ -125,7 +125,7 @@ function CartPage() {
             <div className="flex justify-between items-center mt-4">
               <button
                 onClick={handleClear}
-                className="text-red-600 hover:underline mt-2 bg-white p-2 shadow rounded border-gray-100"
+                className="text-gray-800 hover:text-gray-900 mt-2 bg-white p-2 shadow rounded border-gray-100"
               >
                 Clear Cart
               </button>
@@ -134,16 +134,20 @@ function CartPage() {
                   Total: ${cart.totalPrice || 0}
                 </div>
                 <button
-                  onClick={() => navigate("/checkout")}
-                  className={`bg-green-600 text-white px-4 py-2 rounded cursor-pointer ${
-                    cartItems.length === 0
-                      ? "opacity-50 cursor-not-allowed"
-                      : ""
-                  }`}
-                  disabled={cartItems.length === 0}
-                >
-                  Proceed to Checkout
-                </button>
+  onClick={() => navigate("/checkout")}
+  disabled={cartItems.length === 0}
+  className={`
+    cursor-pointer px-4 py-2 rounded shadow
+    bg-white text-slate-900 accent-blue-600
+    hover:bg-gray-200
+    dark:bg-gray-800 dark:text-gray-100 dark:accent-blue-600 dark:hover:bg-gray-900
+    transition-colors duration-200
+    ${cartItems.length === 0 ? "opacity-50 cursor-not-allowed" : ""}
+  `}
+>
+  Proceed to Checkout
+</button>
+
               </div>
             </div>
           </>

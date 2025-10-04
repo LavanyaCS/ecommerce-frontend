@@ -30,6 +30,7 @@ function Login() {
       console.log(res.data);
       toast.success("Logged Successfully");
       localStorage.setItem("token", res.data.token);
+      
       const decoded = jwtDecode(res.data.token);
 if (decoded.role === "admin") navigate("/admin/dashboard");
 else if (decoded.role === "seller") navigate("/seller/dashboard");

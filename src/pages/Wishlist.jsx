@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { baseUrl } from "../api";
+import toast from "react-hot-toast";
 function Wishlist() {
     const [wishlist, setWishlist] = useState([]);
   const token = localStorage.getItem("token");
@@ -14,6 +15,26 @@ function Wishlist() {
       setWishlist(res.data.wishlist || []);
     } catch (err) {
       console.error("Failed to fetch wishlist:", err);
+    }
+  };
+  // Add to cart
+  const handleAddToCart = async (productId) => {
+    if (!token) {
+      toast.error("Please login to add items to cart");
+      navigate("/login");
+      return;
+    }
+
+    try {
+      await axios.post(
+        `${baseUrl}/cart`,
+        { product: productId, quantity: 1 },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      toast.success("Added to cart");
+    } catch (err) {
+      console.error(err.response?.data || err.message);
+      toast.error("Failed to add to cart");
     }
   };
 
@@ -55,7 +76,7 @@ function Wishlist() {
 
   if (!token) return <p>Please log in to view your wishlist.</p>;
   return (
-    <div className="max-w-6xl mx-auto p-6 space-y-6">
+    <div className="max-w-5xl mx-auto p-6 space-y-6">
       <h2 className="text-2xl font-bold">Your Wishlist</h2>
       {wishlist.length === 0 ? (
         <p>Your wishlist is empty.</p>
@@ -64,7 +85,7 @@ function Wishlist() {
           {wishlist.map((item) => (
             <div key={item._id} className="border p-4 rounded shadow relative">
               <img
-                src={item.product.image[0]}
+                src={item.product?.image}
                 alt={item.product.title}
                 className="w-full h-48 object-cover rounded"
               />
@@ -73,18 +94,20 @@ function Wishlist() {
 
               {/* Buttons */}
               <div className="flex gap-2 mt-2">
+               
                 <button
+                  onClick={() => handleAddToCart(item.product._id)}
+              className="cursor-pointer px-4 py-2 rounded shadow bg-white dark:bg-gray-800 text-slate-900 accent-blue-600 dark:accent-blue-600 dark:text-gray-100" 
+                >
+                  Add to Cart
+                </button>
+                 <button
                   onClick={() => removeItem(item.product._id)}
-                  className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
+                  className="bg-gray-100 text-slate-700 px-3 py-1 rounded hover:bg-gray-800 hover:text-white"
                 >
-                  Remove
+                  Remove Wishlist
                 </button>
-                <button
-                  onClick={() => toggleWishlist(item.product._id)}
-                  className="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300"
-                >
-                  Toggle ❤️
-                </button>
+                
               </div>
             </div>
           ))}

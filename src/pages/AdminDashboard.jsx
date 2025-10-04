@@ -77,7 +77,7 @@ function AdminDashboard() {
   const fetchProducts = async () => {
     try {
       const res = await axios.get(`${baseUrl}/product`);
-      const productsList = res.data.productInfo || [];
+      const productsList = res.data.products || [];
       setProducts(productsList);
       generateCategoryChart(productsList);
     } catch {
@@ -97,6 +97,7 @@ function AdminDashboard() {
   const fetchDashboardStats = async () => {
     try {
       const res = await axios.get(`${baseUrl}/admin/dashboard`, axiosConfig);
+      console.log(res.data);
       setDashboardStats(res.data);
     } catch {
       toast.error("Failed to fetch dashboard stats");

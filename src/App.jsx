@@ -1,7 +1,6 @@
 import React from 'react'
 import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
-import Dashboard from './components/Dashboard'
 import Home from './components/Home'
 import { Route, Routes } from 'react-router-dom'
 import Header from './pages/Header'
@@ -18,6 +17,10 @@ import OrderPage from './pages/OrderPage'
 import OrderDetailPage from './pages/OrderDetailPage'
 import SellerDashboard from './pages/SellerDashboard'
 import AdminDashboard from './pages/AdminDashboard'
+import Footer from './pages/Footer'
+import AboutUs from './pages/AboutUs'
+import { Contact } from 'lucide-react'
+import ContactUs from './pages/ContactUs'
 
 function App() {
   return (
@@ -34,7 +37,6 @@ function App() {
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/seller/dashboard" element={<SellerDashboard />} />
 
-        <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/product" element={<Product />}></Route>
         <Route path="/product/:id" element={<ProductDetail />}></Route>
 
@@ -46,10 +48,13 @@ function App() {
  <Route path="/account" element={<MyAccount />} />
   <Route path="/account/addresses" element={<AddressPage />} />
   <Route path="/myorders" element={<OrderPage />} />
+  <Route path="/about" element={<AboutUs />} />
+  <Route path="/contact" element={<ContactUs />} />
 
 
       </Routes>
       </div>
+        <Footer />
     </div>
   )
 }

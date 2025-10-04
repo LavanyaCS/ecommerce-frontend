@@ -2,59 +2,64 @@ import React, { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { baseUrl } from "../api";
-import {
-  Facebook,
-  TwitterIcon,
-  Linkedin,
-  Instagram,
-  Youtube,
-  Heart,
-  ShoppingBasket,
-  Search,
-  ChevronDown,
-  Menu,
-  X,
-  UserCircle,
-} from "lucide-react";
+import { Heart, ShoppingBasket, Menu, X, UserCircle } from "lucide-react";
 import { jwtDecode } from "jwt-decode";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 
 function Header() {
   const [categories, setCategories] = useState([]);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [open, setOpen] = useState(false);
   const [username, setUsername] = useState("");
-  const menuRef = useRef();
+  const [userRole, setUserRole] = useState("");
   const [token, setToken] = useState(localStorage.getItem("token") || null);
-
+  const menuRef = useRef();
+  const navigate = useNavigate();
+        const [isDark,setIsDark]=useState(false);
+    useEffect(()=>{
+        const savedTheme = localStorage.getItem('theme');
+        if(savedTheme === 'dark'){
+            document.documentElement.classList.add('dark');
+            setIsDark(true);
+        }
+    },[]);
+    const toggleTheme = () => {
+        const newTheme = !isDark;
+        setIsDark(newTheme);
+        document.documentElement.classList.toggle('dark',newTheme);
+        localStorage.setItem('theme',newTheme ? 'dark' : 'light');
+    }
+  // Decode token
   useEffect(() => {
-    if (token) {
-      try {
-        const decoded = jwtDecode(token);
-        setUsername(decoded.username || "");
-      } catch (err) {
-        console.error("Invalid token:", err);
-        setUsername("");
-      }
+    if (!token) return;
+    try {
+      const decoded = jwtDecode(token);
+      setUsername(decoded.username || "");
+      setUserRole(decoded.role || "");
+    } catch (err) {
+      console.error("Invalid token:", err);
+      setToken(null);
+      setUsername("");
+      setUserRole("");
     }
   }, [token]);
-const navigate = useNavigate();
+
   const handleLogout = () => {
     localStorage.removeItem("token");
-    toast.error("Logged Out Successfully");
-    navigate("/");
+    toast.success("Logged out successfully");
     setToken(null);
     setUsername("");
+    setUserRole("");
+    navigate("/");
   };
 
-  // fetch categories
+  // Fetch categories
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const res = await axios.get(`${baseUrl}/category`);
         setCategories(res.data.categoryInfo || []);
       } catch (err) {
-        console.error("Failed to load categories:", err);
+        console.error("Failed to fetch categories:", err);
       }
     };
     fetchCategories();
@@ -62,232 +67,204 @@ const navigate = useNavigate();
 
   // Close dropdown on outside click
   useEffect(() => {
-    const handler = (e) => {
+    const handleClickOutside = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setOpen(false);
+        setMobileOpen(false);
       }
     };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Common menu links
+  const menuLinks = (
+    <>
+      <Link to="/" className="hover:text-blue-600 dark:hover:text-blue-400">Home</Link>
+      <Link to="/product" className="hover:text-blue-600 dark:hover:text-blue-400">Product</Link>
+    {userRole === "admin" && (
+  <Link to="/admin/dashboard" className="hover:text-blue-600 dark:hover:text-blue-400">
+    Admin Panel
+  </Link>
+)}
+
+{userRole === "seller" && (
+  <Link to="/seller/dashboard" className="hover:text-blue-600 dark:hover:text-blue-400">
+    Seller Dashboard
+  </Link>
+)}
+    </>
+  );
+//Wishlist and cart count
+const [wishlistCount, setWishlistCount] = useState(0);
+  const [cartCount, setCartCount] = useState(0);
+  //Wishlistlist count
+  useEffect(() => { 
+     if (!token) return;
+    const fetchWishlistCount = async() =>{
+    try{
+     
+      const res = await axios.get(`${baseUrl}/wishlist`,{
+        headers:{Authorization: `Bearer ${token}`},
+      });
+      if(res.data.count !== undefined){
+        setWishlistCount(res.data.count);
+      }
+       else if (res.data.wishlist) {
+        setWishlistCount(res.data.wishlist.length);
+      }
+
+    }
+     catch (error) {
+      console.error("Failed to fetch wishlist count:", error);
+    }
+  }
+   const fetchCartCount = async () => {
+    try {
+      const res = await axios.get(`${baseUrl}/cart`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (res.data.count !== undefined) {
+        setCartCount(res.data.count);
+      } else if (res.data.cart && res.data.cart.items) {
+        setCartCount(res.data.cart.items.length);
+      }
+    } catch (error) {
+      console.error("Failed to fetch cart count:", error);
+    }
+  };
+  fetchWishlistCount();
+  fetchCartCount();
+  },[token]);
   return (
-    <div>
     <header className="relative">
-      <nav>
-        {/* miniheader */}
-        <div className="flex justify-between gap-4 h-8 bg-blue-200 items-center px-4 md:px-16 text-black text-sm">
-          <div className="flex justify-start gap-3">
-            <Link to="/faq" className="uppercase hover:underline">
-              Faq
-            </Link>
-            |
-            <Link to="/help" className="hover:underline">
-              Help
-            </Link>
-            |
-            <Link to="/support" className="hover:underline">
-              Support
-            </Link>
-          </div>
-          <div className="flex justify-end gap-4 text-gray-700">
-            <Facebook size={14} />
-            <TwitterIcon size={14} />
-            <Linkedin size={14} />
-            <Instagram size={14} />
-            <Youtube size={14} />
-          </div>
-        </div>
-
-        {/* mainheader */}
-        <div className="flex justify-between gap-4 bg-white px-4 md:px-16 h-20 items-center">
+      <nav className="border-y border-gray-100">
+        {/* Main Header */}
+        <div className="flex justify-between items-center bg-white dark:bg-gray-800 text-slate-900 accent-blue-600 dark:accent-blue-600 dark:text-gray-100 px-4 md:px-16 h-20">
           <div>
-            <h1 className="m-0 font-semibold text-2xl">
-              <span className="text-primary font-bold border border-gray-200 px-3 mr-1">
-                E
-              </span>
-              Shopper
-            </h1>
+            <h1 className="font-semibold text-2xl">
+               <Link to="/">
+              <span className="text-gray-800 dark:text-white  font-bold border border-gray-200 px-3 mr-1">L</span>iyara
+</Link>            </h1>
           </div>
 
-          {/* Search (hidden on small screens) */}
-          <div className="hidden md:flex justify-center gap-4 items-center w-1/2">
-            <div className="relative w-full">
-              <input
-                type="text"
-                placeholder="Search for products"
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer">
-                <Search size={16} />
-              </span>
-            </div>
+          {/* Desktop Menu */}
+          <div className="hidden md:flex justify-center items-center gap-6 font-medium">
+            {menuLinks}
           </div>
 
-          {/* Wishlist + Cart */}
-          <div className="flex gap-4 items-center">
-            <div className="border border-gray-200 rounded-sm p-2 flex items-center gap-2">
-              <Link to={`/my-wishlist`} >
-              <Heart size={16} className="text-primary" />
-              {/* <span>0</span> */}
-            </Link>
-              </div>
-            <div className="border border-gray-200 rounded-sm p-2 flex items-center gap-2">
-              <Link to={`/cart`} ><ShoppingBasket size={16} className="text-primary" />
-</Link>              {/* <span>0</span> */}
-            </div>
-          </div>
-
-          {/* Hamburger (mobile only) */}
-          <div className="md:hidden flex items-center">
-            <button onClick={() => setMobileOpen(!mobileOpen)}>
-              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        </div>
-
-        {/* second header (desktop only) */}
-        <div className="hidden md:flex justify-between gap-4 bg-white px-16 border-y border-gray-100 h-14 items-center">
-          {/* Categories dropdown */}
-          <div className="relative" ref={menuRef}>
-            <button
-              onClick={() => setOpen(!open)}
-              aria-expanded={open}
-              className="flex items-center gap-2 px-6 h-14 py-2 bg-primary w-64 text-black font-semibold rounded-md"
-            >
-              Categories
-              <ChevronDown
-                className={`transition-transform ${open ? "rotate-180" : ""}`}
-                size={16}
-              />
-            </button>
-
-            {open && (
-              <div className="absolute mt-2 py-1 w-48 bg-white shadow-lg border rounded-md z-50">
-                {categories.length > 0 ? (
-                  categories.map((cat) => (
-                    <Link
-                      key={cat._id}
-                      to={`/shop/${cat.title}`}
-                      className="block px-4 py-2 hover:bg-gray-100"
-                    >
-                      {cat.title}
-                    </Link>
-                  ))
-                ) : (
-                  <p className="px-4 py-2 text-gray-500">No categories</p>
-                )}
-              </div>
-            )}
-          </div>
-
-          {/* Center links */}
-          <div className="flex justify-center gap-6 items-center w-1/2 font-medium">
-            <Link to="/" className="hover:text-rose-600">
-              Home
-            </Link>
-            <Link to="/product" className="hover:text-rose-600">
-              Product
-            </Link>
-            <Link to="/contact" className="hover:text-rose-600">
-              Contact
-            </Link>
-          </div>
-
-          {/* Auth (Desktop) */}
-          <div className="flex gap-4 items-center">
+          {/* Right: Wishlist, Cart, User */}
+          <div className="flex items-center gap-4">
             {token ? (
-                 <div className="hidden md:flex items-center gap-6 flex-1 justify-end relative group">
-                  <span className="ml-4 font-bold capitalize flex gap-2 items-center cursor-pointer">
-                    <UserCircle size={24} /> Hi {username}
-                  </span>
-
-                  {/* My Account Dropdown */}
-                  <div className="absolute top-full right-0 bg-white border shadow-md rounded-md w-40 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
-                    <Link
-                      to="/account"
-                      className="block px-4 py-2 hover:bg-gray-100 text-sm"
-                    >
-                      My Account
-                    </Link>
-                     <Link
-                      to="/myorders"
-                      className="block px-4 py-2 hover:bg-gray-100 text-sm"
-                    >
-                      My Orders
-                    </Link>
-                    <Link
-                      to="/account/addresses"
-                      className="block px-4 py-2 hover:bg-gray-100 text-sm"
-                    >
-                      Saved Addresses
-                    </Link>
-                    <button
-                      onClick={handleLogout}
-                      className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-sm text-red-600"
-                    >
-                      Logout
-                    </button>
-                  </div>
+              <div className="hidden md:flex items-center gap-6 relative group">
+                <span className="ml-4 font-bold capitalize flex gap-2 items-center cursor-pointer">
+                  <UserCircle size={24} /> Hi {username}
+                </span>
+                <div className="absolute top-full right-0 z-10 bg-white text-gray-900 border shadow-md rounded-md w-40 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
+                  <Link to="/account" className="block px-4 py-2 hover:bg-gray-100 text-sm">My Account</Link>
+                  <Link to="/myorders" className="block px-4 py-2 hover:bg-gray-100 text-sm">My Orders</Link>
+                  <Link to="/account/addresses" className="block px-4 py-2 hover:bg-gray-100 text-sm">Saved Addresses</Link>
+                  <button onClick={handleLogout} className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-sm">Logout</button>
                 </div>
+              </div>
             ) : (
-              <div className="hidden md:flex items-center gap-6 flex-1 justify-end">
-                <Link to="/login" className="hover:text-rose-600">
-                  Login
-                </Link>
-                <Link to="/register" className="hover:text-rose-600">
-                  Register
-                </Link>
+              <div className="hidden md:flex items-center gap-6">
+                <Link to="/login" className="hover:text-blue-600 dark:hover:text-blue-400">Login</Link>
+                <Link to="/register" className="hover:text-blue-600 dark:hover:text-blue-400">Register</Link>
               </div>
             )}
+
+      {/* Wishlist Icon */}
+      <div className="border border-gray-200 dark:border-gray-700 rounded-sm p-2">
+        <Link to="/my-wishlist" className="relative">
+          <Heart
+            size={20}
+            className="
+             bg-white text-black dark:bg-gray-800 dark:text-white
+              transition-colors duration-300
+            "
+          />
+          {wishlistCount > 0 && (
+            <span
+              className="
+                absolute -top-2 -right-2
+                 dark:bg-white dark:text-black bg-gray-800 text-white text-[10px] font-semibold
+                flex justify-center items-center
+                w-4 h-4 rounded-full
+                border border-white dark:border-gray-800
+              "
+            >
+              {wishlistCount}
+            </span>
+          )}
+        </Link>
+      </div>
+
+      {/* Cart Icon */}
+      <div className="border border-gray-200 dark:border-gray-700 rounded-sm p-2">
+        <Link to="/cart" className="relative">
+          <ShoppingBasket
+            size={20}
+            className="
+              bg-white text-black dark:bg-gray-800 dark:text-white
+              transition-colors duration-300
+            "
+          />
+          {cartCount > 0 && (
+            <span
+              className="
+                absolute -top-2 -right-2
+                 dark:bg-white dark:text-black bg-gray-800 text-white text-[10px] font-semibold
+                flex justify-center items-center
+                w-4 h-4 rounded-full
+                border border-white dark:border-gray-800
+              "
+            >
+              {cartCount}
+            </span>
+          )}
+        </Link>
+      </div>
+     
+    <div>
+     <button
+      onClick={toggleTheme}
+      className="z-50 px-4 py-2 text-sm text-black bg-white rounded-lg bottom-4 left-4 dark:bg-gray-800 dark:text-white border border-gray-100"
+    >
+      {isDark ? '☀️ Light' : '🌙 Dark'}
+    </button></div>
+
+            {/* Mobile Hamburger */}
+            <div className="md:hidden">
+              <button onClick={() => setMobileOpen(!mobileOpen)}>
+                {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </div>
         </div>
       </nav>
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="absolute top-full left-0 w-full bg-white shadow-md md:hidden z-50">
+        <div ref={menuRef} className="absolute top-full left-0 w-full bg-white shadow-md md:hidden z-50">
           <div className="flex flex-col p-4 gap-2">
-            <Link to="/" onClick={() => setMobileOpen(false)}>
-              Home
-            </Link>
-            <Link to="/product" onClick={() => setMobileOpen(false)}>
-              Product
-            </Link>
-            <Link to="/contact" onClick={() => setMobileOpen(false)}>
-              Contact
-            </Link>
-
+            {menuLinks}
             {token ? (
               <>
                 <span className="flex items-center gap-2 font-bold mt-2">
                   <UserCircle size={20} /> Hi {username}
                 </span>
-                <button
-                  onClick={() => {
-                    handleLogout();
-                    setMobileOpen(false);
-                  }}
-                  className="text-left hover:text-red-600 mt-2"
-                >
-                  Logout
-                </button>
+                <button onClick={handleLogout} className="text-left  mt-2">Logout</button>
               </>
             ) : (
               <>
-                <Link to="/login" onClick={() => setMobileOpen(false)}>
-                  Login
-                </Link>
-                <Link to="/register" onClick={() => setMobileOpen(false)}>
-                  Register
-                </Link>
+                <Link to="/login" onClick={() => setMobileOpen(false)}>Login</Link>
+                <Link to="/register" onClick={() => setMobileOpen(false)}>Register</Link>
               </>
             )}
           </div>
         </div>
       )}
     </header>
-</div>
   );
 }
 

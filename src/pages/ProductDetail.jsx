@@ -26,7 +26,7 @@ function ProductDetail() {
     const fetchProduct = async () => {
       try {
         const res = await axios.get(`${baseUrl}/product/${id}`);
-        setProduct(res.data.productInfo);
+        setProduct(res.data.products);
       } catch (err) {
         console.error(err);
       }
@@ -181,7 +181,7 @@ function ProductDetail() {
   if (!product) return <p>Loading...</p>;
 
   return (
-    <div className="p-6 max-w-6xl mx-auto space-y-10">
+    <div className="p-6 max-w-5xl mx-auto space-y-10">
       {/* Product Info */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         <img
@@ -194,7 +194,7 @@ function ProductDetail() {
           <p className="text-red-500 font-semibold text-xl">${product.price}</p>
           <p>{product.description}</p>
 
-            <p>Total quantity : {product.quantity}</p>
+            {/* <p>Total quantity : {product.quantity}</p> */}
 
           <div className="flex gap-4 items-center">
                         <p className="font-semibold">Quantity:</p>
@@ -210,18 +210,20 @@ function ProductDetail() {
           <div className="flex gap-4 mt-4">
             <button
               onClick={handleAddToCart}
-              className="cursor-pointer px-4 py-2 rounded shadow bg-primary text-white" 
+              className="cursor-pointer px-4 py-2 rounded shadow bg-white hover:bg-gray-200 dark:bg-gray-800 text-slate-900 accent-blue-600 dark:accent-blue-600 dark:text-gray-100 dark:hover:bg-gray-900" 
             >
               Add to Cart
             </button>
+            
             <button
               onClick={toggleWishlist}
-              className={`px-4 py-2 rounded shadow ${
-                inWishlist ? "bg-primary text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              className={`cursor-pointer  px-4 py-2 rounded shadow ${
+                inWishlist ? "bg-white dark:bg-gray-800 text-slate-900 accent-blue-600 dark:accent-blue-600 dark:text-gray-100" : "bg-gray-100 text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-900 dark:hover:text-white"
               }`}
             >
               {inWishlist ? "❤️ Wishlist" : "🤍 Wishlist"}
             </button>
+
           </div>
 
           {/* Reviews */}
@@ -298,7 +300,7 @@ function ProductDetail() {
               />
               <button
                 onClick={handleReviewSubmit}
-                className="bg-primary hover:bg-rose-600 text-white px-5 py-2 rounded-lg cursor-pointer"
+                className="cursor-pointer px-4 py-2 rounded shadow bg-white hover:bg-gray-200 dark:bg-gray-800 text-slate-900 accent-blue-600 dark:accent-blue-600 dark:text-gray-100 dark:hover:bg-gray-900 "
               >
                 {userReview ? "Update Review" : "Submit Review"}
               </button>

@@ -21,6 +21,7 @@ function Category() {
   }, []);
   return (
     <div>
+  <h2 className='text-2xl text-left font-semibold py-6'>Category</h2>
 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-6">
         {categories.length > 0 ? (
                   categories.map((cat) => (
@@ -33,7 +34,7 @@ function Category() {
                     >
                       {cat.title}
                     </p> */}
-                    <div key={cat._id} className="flex flex-col border-gray-300 min-h-48 border p-6">
+                    <div key={cat._id} className="flex flex-col border-gray-300 hover:border-blue-200 min-h-48 border p-6">
           {/* <p className="text-right mb-2">{cat.productCount} Products</p> */}
           <Link to={`/category/${cat._id}`} className="relative overflow-hidden mb-4">
             <img className="w-full object-contain transition-transform duration-500 hover:scale-110 h-36" 

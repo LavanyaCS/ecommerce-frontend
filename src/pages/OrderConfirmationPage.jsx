@@ -26,7 +26,7 @@ function OrderConfirmationPage() {
   if (!order) return <p className="p-6">Loading order...</p>;
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-6">
+    <div className="max-w-5xl mx-auto p-6 space-y-6">
       <h2 className="text-2xl font-bold text-green-600">Order Confirmed!</h2>
       <p>Order ID: {order._id}</p>
       <p>Total Amount: ${order.totalAmount}</p>

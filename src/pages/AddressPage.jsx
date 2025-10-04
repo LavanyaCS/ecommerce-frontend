@@ -206,7 +206,7 @@ function AddressPage() {
         <div className="col-span-2 flex gap-2">
           <button
             type="submit"
-            className="bg-primary cursor-pointer  text-white py-2 rounded flex-1"
+            className="cursor-pointer px-4 py-2 shadow bg-white text-slate-900 accent-blue-600 dark:bg-gray-800 dark:text-gray-100 dark:accent-blue-600 rounded flex-1"
           >
             {editingId ? "Update Address" : "Add Address"}
           </button>
@@ -243,24 +243,24 @@ function AddressPage() {
                   </span>
                 )}
               </div>
-              <div className="flex flex-col items-end gap-2">
+              <div className="flex flex-row items-end gap-2">
                 {!addr.isDefault && (
                   <button
                     onClick={() => setDefault(addr._id)}
-                    className="text-blue-600 text-sm hover:font-semibold cursor-pointer  bg-white p-2 rounded shadow"
+                    className="text-blue-600 text-sm hover:text-blue-700 cursor-pointer  bg-white p-2 rounded shadow"
                   >
                     Set Default
                   </button>
                 )}
                 <button
                   onClick={() => handleEdit(addr)}
-                  className="cursor-pointer text-yellow-600 text-sm hover:font-semibold bg-white p-2 rounded shadow"
+                  className="cursor-pointer text-yellow-600 text-sm hover:text-yellow-700 bg-white p-2 rounded shadow"
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => handleDelete(addr._id)}
-                  className="cursor-pointer text-red-600 text-sm hover:font-semibold  bg-white p-2 rounded shadow"
+                  className="cursor-pointer text-red-600 text-sm hover:text-red-700  bg-white p-2 rounded shadow"
                 >
                   Delete
                 </button>

@@ -22,7 +22,7 @@ const slides = [
   },
 ];
 
-export default function Carousel() {
+export default function HeroSection() {
   const [current, setCurrent] = useState(0);
 
   const prevSlide = () => {

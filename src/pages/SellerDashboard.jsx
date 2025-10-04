@@ -42,11 +42,11 @@ function SellerDashboard() {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        setProducts(res.data.productInfo);
+        setProducts(res.data.products);
 
         // Prepare chart data: products per category
         const categoryCount = {};
-        res.data.productInfo.forEach((p) => {
+        res.data.products.forEach((p) => {
           const name = p.category?.title || "Uncategorized";
           categoryCount[name] = (categoryCount[name] || 0) + 1;
         });
@@ -133,7 +133,7 @@ function SellerDashboard() {
       <div className="mb-6 flex justify-end">
         <button
           onClick={() => setShowModal(true)}
-          className="bg-primary text-white px-4 py-2 rounded cursor-pointer"
+          className="bg-white dark:bg-gray-800 text-slate-900 accent-blue-600 dark:accent-blue-600 dark:text-gray-100 px-4 py-2 rounded cursor-pointer"
         >
           Add Product
         </button>
@@ -165,8 +165,8 @@ function SellerDashboard() {
                 </div>
               </div></Link>
               <div className="grid grid-cols-2 divide-x border-t">
-                                <button className="col-span-1 cursor-pointer text-yellow-600 text-sm hover:font-semibold bg-white p-2 rounded shadow" onClick={() => editProduct(product)}>Edit</button>
-                <button className="cursor-pointer col-span-1 text-red-600 text-sm hover:font-semibold  bg-white p-2 rounded shadow" onClick={() => deleteProduct(product._id)}>Delete</button>
+                                <button className="col-span-1 cursor-pointer text-yellow-600 text-sm hover:text-yellow-700 bg-white p-2 rounded shadow" onClick={() => editProduct(product)}>Edit</button>
+                <button className="cursor-pointer col-span-1 text-red-600 text-sm hover:text-red-700  bg-white p-2 rounded shadow" onClick={() => deleteProduct(product._id)}>Delete</button>
 
               </div>
             </div>
