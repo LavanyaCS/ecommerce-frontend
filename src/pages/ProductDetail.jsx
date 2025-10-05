@@ -210,14 +210,14 @@ function ProductDetail() {
           <div className="flex gap-4 mt-4">
             <button
               onClick={handleAddToCart}
-              className="cursor-pointer px-4 py-2 rounded shadow bg-white hover:bg-gray-200 dark:bg-gray-800 text-slate-900 accent-blue-600 dark:accent-blue-600 dark:text-gray-100 dark:hover:bg-gray-900" 
+              className="cursor-pointer px-1 py-1 md:px-2 md:py-2 rounded shadow bg-white hover:bg-gray-200 dark:bg-gray-800 text-slate-900 accent-blue-600 dark:accent-blue-600 dark:text-gray-100 dark:hover:bg-gray-900" 
             >
               Add to Cart
             </button>
             
             <button
               onClick={toggleWishlist}
-              className={`cursor-pointer  px-4 py-2 rounded shadow ${
+              className={`cursor-pointer  px-1 py-1 md:px-2 md:py-2 rounded shadow ${
                 inWishlist ? "bg-white dark:bg-gray-800 text-slate-900 accent-blue-600 dark:accent-blue-600 dark:text-gray-100" : "bg-gray-100 text-gray-700 hover:bg-gray-200 dark:hover:bg-gray-900 dark:hover:text-white"
               }`}
             >
@@ -257,7 +257,7 @@ function ProductDetail() {
                     {menuOpenId === r._id && (
                       <div className="absolute right-0 mt-2 w-44 bg-white border rounded shadow-lg z-10">
                         <button
-                          className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                          className="block w-full text-left px-1 py-1 md:px-2 md:py-2 hover:bg-gray-100"
                           onClick={() => {
                             setEditingReviewId(r._id);
                             setMenuOpenId(null);
@@ -268,7 +268,7 @@ function ProductDetail() {
                           Edit Review
                         </button>
                         <button
-                          className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-red-600"
+                          className="block w-full text-left px-1 py-1 md:px-2 md:py-2 hover:bg-gray-100 text-red-600"
                           onClick={handleDeleteReview}
                         >
                           Delete Review
@@ -300,7 +300,7 @@ function ProductDetail() {
               />
               <button
                 onClick={handleReviewSubmit}
-                className="cursor-pointer px-4 py-2 rounded shadow bg-white hover:bg-gray-200 dark:bg-gray-800 text-slate-900 accent-blue-600 dark:accent-blue-600 dark:text-gray-100 dark:hover:bg-gray-900 "
+                className="cursor-pointer px-1 py-1 md:px-2 md:py-2 rounded shadow bg-white hover:bg-gray-200 dark:bg-gray-800 text-slate-900 accent-blue-600 dark:accent-blue-600 dark:text-gray-100 dark:hover:bg-gray-900 "
               >
                 {userReview ? "Update Review" : "Submit Review"}
               </button>

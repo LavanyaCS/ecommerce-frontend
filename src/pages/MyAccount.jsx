@@ -40,7 +40,7 @@ const MyAccount = () => {
         <p className="text-gray-600 mb-3">Manage your shipping and billing addresses.</p>
         <Link
           to="/account/addresses"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          className="bg-gray-800 text-white px-1 py-1 md:px-2 md:py-2 rounded hover:bg-gray-900"
         >
           Go to Addresses
         </Link>

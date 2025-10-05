@@ -5,7 +5,7 @@ function AboutUs() {
     <div className="max-w-4xl mx-auto p-6 space-y-8">
       {/* Header */}
       <header className="text-center">
-        <h1 className="text-4xl font-bold text-blue-600 mb-2">About Liyara</h1>
+        <h1 className="text-4xl font-bold text-gray-800 mb-2">About Liyara</h1>
         <p className="text-gray-700 text-lg">
           Discover the story behind our brand and what drives us.
         </p>

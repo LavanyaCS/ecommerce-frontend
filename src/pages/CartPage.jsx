@@ -137,7 +137,7 @@ function CartPage() {
   onClick={() => navigate("/checkout")}
   disabled={cartItems.length === 0}
   className={`
-    cursor-pointer px-4 py-2 rounded shadow
+    cursor-pointer px-1 py-1 md:px-2 md:py-2 rounded shadow
     bg-white text-slate-900 accent-blue-600
     hover:bg-gray-200
     dark:bg-gray-800 dark:text-gray-100 dark:accent-blue-600 dark:hover:bg-gray-900

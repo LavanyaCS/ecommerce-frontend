@@ -97,7 +97,7 @@ function Wishlist() {
                
                 <button
                   onClick={() => handleAddToCart(item.product._id)}
-              className="cursor-pointer px-4 py-2 rounded shadow bg-white dark:bg-gray-800 text-slate-900 accent-blue-600 dark:accent-blue-600 dark:text-gray-100" 
+              className="cursor-pointer px-1 py-1 md:px-2 md:py-2 rounded shadow bg-white dark:bg-gray-800 text-slate-900 accent-blue-600 dark:accent-blue-600 dark:text-gray-100" 
                 >
                   Add to Cart
                 </button>

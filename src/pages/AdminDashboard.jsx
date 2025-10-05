@@ -175,7 +175,33 @@ function AdminDashboard() {
       toast.error(err.response?.data?.message || "Failed to update order status");
     }
   };
+{/*Screen version */}
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 1024); // mobile & tablet
+    };
+
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+   if (isMobile) {
+    return (
+      <div className="flex items-center justify-center h-full bg-gray-100 text-center p-4">
+        <div>
+          <h1 className="text-2xl font-bold mb-2">⚠️ Desktop Only</h1>
+          <p className="text-gray-600">
+            The Admin Dashboard is only accessible on desktop devices.  
+            Please use a larger screen to continue.
+          </p>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-6">Admin Dashboard</h1>
@@ -245,24 +271,24 @@ function AdminDashboard() {
           <div className="p-4 border-t">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-semibold">Product List</h2>
-              <button onClick={handleAddProduct} className="bg-indigo-600 text-white px-4 py-2 rounded">+ Add Product</button>
+              <button onClick={handleAddProduct} className="bg-indigo-600 text-white px-1 py-1 md:px-2 md:py-2 rounded">+ Add Product</button>
             </div>
             <table className="min-w-full">
               <thead>
                 <tr className="border-b">
-                  <th className="p-2 text-left">Title</th>
-                  <th className="p-2 text-left">Category</th>
-                  <th className="p-2 text-left">Price</th>
-                  <th className="p-2 text-left">Actions</th>
+                  <th className="px-1 py-1 md:p-2 text-left">Title</th>
+                  <th className="px-1 py-1 md:p-2 text-left hidden md:inline">Category</th>
+                  <th className="px-1 py-1 md:p-2 text-left">Price</th>
+                  <th className="px-1 py-1 md:p-2 text-left">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {products.length ? products.map(p => (
                   <tr key={p._id} className="border-b">
-                    <td className="p-2">{p.title}</td>
-                    <td className="p-2">{p.category?.title || "—"}</td>
-                    <td className="p-2">₹{p.price}</td>
-                    <td className="p-2 flex gap-2">
+                    <td className="px-1 py-1 md:p-2 ">{p.title}</td>
+                    <td className="px-1 py-1 md:p-2   hidden md:inline">{p.category?.title || "—"}</td>
+                    <td className="px-1 py-1 md:p-2 ">₹{p.price}</td>
+                    <td className="px-1 py-1 md:p-2  flex gap-2">
                       <button onClick={() => handleEditProduct(p)} className="bg-blue-600 text-white px-3 py-1 rounded">Edit</button>
                       <button onClick={() => handleDeleteProduct(p._id)} className="bg-red-600 text-white px-3 py-1 rounded">Delete</button>
                     </td>
@@ -288,25 +314,25 @@ function AdminDashboard() {
             <table className="min-w-full">
               <thead>
                 <tr className="border-b">
-                  <th className="p-2 text-left">Order ID</th>
-                  <th className="p-2 text-left">User</th>
-                  <th className="p-2 text-left">Total Amount</th>
-                  <th className="p-2 text-left">Payment Status</th>
-                  <th className="p-2 text-left">Order Status</th>
-                  <th className="p-2 text-left">Actions</th>
+                  <th className="px-1 py-1 md:p-2 text-left">Order ID</th>
+                  <th className="px-1 py-1 md:p-2 text-left">User</th>
+                  <th className="px-1 py-1 md:p-2 text-left">Total Amount</th>
+                  <th className="px-1 py-1 md:p-2 text-left">Payment Status</th>
+                  <th className="px-1 py-1 md:p-2 text-left">Order Status</th>
+                  <th className="px-1 py-1 md:p-2 text-left">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {orders.length ? orders.map(o => (
                   <tr key={o._id} className="border-b">
-                    <td className="p-2">{o._id}</td>
-                    <td className="p-2">{o.user?.username || o.user?.email}</td>
-                    <td className="p-2">₹{o.totalAmount}</td>
-                    <td className="p-2 capitalize">{o.paymentStatus}
+                    <td className="px-1 py-1 md:p-2 ">{o._id}</td>
+                    <td className="px-1 py-1 md:p-2 ">{o.user?.username || o.user?.email}</td>
+                    <td className="px-1 py-1 md:p-2 ">₹{o.totalAmount}</td>
+                    <td className="px-1 py-1 md:p-2  capitalize">{o.paymentStatus}
                     </td>
-                    <td className="p-2 capitalize">{o.orderStatus}
+                    <td className="px-1 py-1 md:p-2  capitalize">{o.orderStatus}
                     </td>
-                    <td className="p-2 flex gap-2">
+                    <td className="px-1 py-1 md:p-2  flex gap-2">
                       <button onClick={() => handleViewOrder(o)} className="bg-green-600 text-white px-3 py-1 rounded">View</button>
                       <button onClick={() => handleDeleteOrder(o._id)} className="bg-red-600 text-white px-3 py-1 rounded">Delete</button>
                     </td>

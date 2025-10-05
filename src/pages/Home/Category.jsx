@@ -30,7 +30,7 @@ function Category() {
                     {/* <p
                       key={cat._id}
                       to={`/shop/${cat.title}`}
-                      className="block px-4 py-2 hover:bg-gray-100"
+                      className="block px-1 py-1 md:px-2 md:py-2 hover:bg-gray-100"
                     >
                       {cat.title}
                     </p> */}
@@ -45,7 +45,7 @@ function Category() {
         </div>
                   ))
                 ) : (
-                  <p className="px-4 py-2 text-gray-500 text-center">No categories</p>
+                  <p className="px-1 py-1 md:px-2 md:py-2 text-gray-500 text-center">No categories</p>
                 )}
     
     </div>

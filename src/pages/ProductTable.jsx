@@ -16,11 +16,11 @@ const ProductTable = ({ products, onEdit, onDelete, onAdd }) => {
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gray-50">
           <tr>
-            <th className="px-4 py-2 text-left">Title</th>
-            <th className="px-4 py-2 text-left">Category</th>
-            <th className="px-4 py-2 text-left">Price</th>
-            <th className="px-4 py-2 text-left">Seller</th>
-            <th className="px-4 py-2 text-center">Actions</th>
+            <th className="px-1 py-1 md:px-2 md:py-2 text-left">Title</th>
+            <th className="px-1 py-1 md:px-2 md:py-2 text-left">Category</th>
+            <th className="px-1 py-1 md:px-2 md:py-2 text-left">Price</th>
+            <th className="px-1 py-1 md:px-2 md:py-2 text-left">Seller</th>
+            <th className="px-1 py-1 md:px-2 md:py-2 text-center">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -33,14 +33,14 @@ const ProductTable = ({ products, onEdit, onDelete, onAdd }) => {
           ) : (
             products.map((product) => (
               <tr key={product._id} className="border-b">
-                <td className="px-4 py-2">{product.title}</td>
-                <td className="px-4 py-2">{product.category?.title || "—"}</td>
-                <td className="px-4 py-2">₹{product.price}</td>
-                <td className="px-4 py-2">{product.user?.name || "—"}</td>
-                <td className="px-4 py-2 text-center space-x-2">
+                <td className="px-1 py-1 md:px-2 md:py-2">{product.title}</td>
+                <td className="px-1 py-1 md:px-2 md:py-2">{product.category?.title || "—"}</td>
+                <td className="px-1 py-1 md:px-2 md:py-2">₹{product.price}</td>
+                <td className="px-1 py-1 md:px-2 md:py-2">{product.user?.name || "—"}</td>
+                <td className="px-1 py-1 md:px-2 md:py-2 text-center space-x-2">
                   <button
                     onClick={() => onEdit(product)}
-                    className="bg-blue-600 text-white px-3 py-1 rounded"
+                    className="bg-blue-600 text-white px-3 py-1 mb-1 rounded"
                   >
                     Edit
                   </button>

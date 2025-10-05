@@ -28,7 +28,7 @@ function App() {
       <div className="h-screen w-full flex flex-col">
 
       <Header />
-      <div className="flex-1 overflow-y-auto w-full">
+      <div className="flex-1 overflow-y-auto w-full px-4 md:px-0">
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/register" element={<Register />}></Route>

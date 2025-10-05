@@ -47,7 +47,7 @@ function CardForm({ amount, onPaymentSuccess }) {
   return (
     <form onSubmit={handlePayment} className="border p-4 rounded mt-2">
       <CardElement className="mb-4 p-2 border rounded" />
-      <button type="submit" className="cursor-pointer px-4 py-2 rounded shadow bg-white text-slate-900 accent-blue-600 dark:bg-gray-800 dark:text-gray-100 dark:accent-blue-600">
+      <button type="submit" className="cursor-pointer px-1 py-1 md:px-2 md:py-2 rounded shadow bg-white text-slate-900 accent-blue-600 dark:bg-gray-800 dark:text-gray-100 dark:accent-blue-600">
         Pay ₹{amount}
       </button>
     </form>
@@ -196,7 +196,7 @@ function CheckoutPage() {
                   <p>{addr.country}</p>
                 </div>
               ))}
-              <button className="mt-2 cursor-pointer px-4 py-2 rounded shadow bg-white text-slate-900 accent-blue-600 dark:bg-gray-800 dark:text-gray-100 dark:accent-blue-600" onClick={() => setAddingNew(true)}>Add New Address</button>
+              <button className="mt-2 cursor-pointer px-1 py-1 md:px-2 md:py-2 rounded shadow bg-white text-slate-900 accent-blue-600 dark:bg-gray-800 dark:text-gray-100 dark:accent-blue-600" onClick={() => setAddingNew(true)}>Add New Address</button>
             </div>
           )}
 

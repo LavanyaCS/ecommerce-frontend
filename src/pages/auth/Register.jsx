@@ -49,19 +49,19 @@ function Register() {
   }
   return (
     <div>
-      <div className='w-1/2 p-6 bg-white-90 shadow rounded mx-auto mt-8 border border-gray-100'>
+      <div className='w-[90%] md:w-1/2 p-6 bg-white-90 shadow rounded mx-auto mt-8 border border-gray-100'>
         <form className='space-y-2' onSubmit={handleSubmit}>
           <div className=''>
             <label className='block mb-1 text-sm font-medium text-left text-black'>Username</label>
-            <input type="text" name="username" onChange={handleChange} value={registerForm.username} placeholder='Enter a username' className='w-full px-4 py-2 border border-gray-900 rounded focus:border-gray-700   focus:ring-1 focus:ring-gray-700 focus:outline-0' />
+            <input type="text" name="username" onChange={handleChange} value={registerForm.username} placeholder='Enter a username' className='w-full px-1 py-1 md:px-2 md:py-2 border border-gray-900 rounded focus:border-gray-700   focus:ring-1 focus:ring-gray-700 focus:outline-0' />
           </div>
           <div className=''>
             <label className='block mb-1 text-sm font-medium text-left text-black'>Email Address</label>
-            <input type="email" name="email" onChange={handleChange} value={registerForm.email} placeholder='Enter a email address' className='w-full px-4 py-2 border border-gray-900 rounded focus:border-gray-700   focus:ring-1 focus:ring-gray-700 focus:outline-0' />
+            <input type="email" name="email" onChange={handleChange} value={registerForm.email} placeholder='Enter a email address' className='w-full px-1 py-1 md:px-2 md:py-2 border border-gray-900 rounded focus:border-gray-700   focus:ring-1 focus:ring-gray-700 focus:outline-0' />
           </div>
           <div className='relative'>
             <label className='block mb-1 text-sm font-medium text-left text-black'>Password</label>
-            <input type={showPassword ? 'text' : 'password'} name="password" onChange={handleChange} value={registerForm.password} placeholder='Enter a password' className='w-full px-4 py-2 border border-gray-900 rounded focus:border-gray-700   focus:ring-1 focus:ring-gray-700 focus:outline-0' />
+            <input type={showPassword ? 'text' : 'password'} name="password" onChange={handleChange} value={registerForm.password} placeholder='Enter a password' className='w-full px-1 py-1 md:px-2 md:py-2 border border-gray-900 rounded focus:border-gray-700   focus:ring-1 focus:ring-gray-700 focus:outline-0' />
             <span onClick={handleTogglePasswordVisibility} className="absolute top-1/2 right-3 cursor-pointer">
               {showPassword ? (<EyeOff />) : (<Eye />)}
             </span>
@@ -69,7 +69,7 @@ function Register() {
 
           <div className=''>
             <label className='block mb-1 text-sm font-medium text-left text-black'>Select Role</label>
-            <select required="" name="role" className="w-full px-4 py-2 border rounded" onChange={handleChange} value={registerForm.role}>
+            <select required="" name="role" className="w-full px-1 py-1 md:px-2 md:py-2 border rounded" onChange={handleChange} value={registerForm.role}>
               <option value="" disabled="" hidden="">---Select a Role---</option>
               <option value="admin">Admin</option>
               <option value="seller">Seller</option>

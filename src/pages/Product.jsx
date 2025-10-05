@@ -128,7 +128,7 @@ function Product() {
             </div>
           ))
         ) : (
-          <p className="px-4 py-2 text-gray-500 text-center col-span-full">
+          <p className="px-1 py-1 md:px-2 md:py-2 text-gray-500 text-center col-span-full">
             No products found
           </p>
         )}

@@ -7,12 +7,12 @@ const OrderTable = ({ orders, onView, onUpdateStatus, onDelete }) => {
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gray-50">
           <tr>
-            <th className="px-4 py-2 text-left">Order ID</th>
-            <th className="px-4 py-2 text-left">User</th>
-            <th className="px-4 py-2 text-left">Total Amount</th>
-            <th className="px-4 py-2 text-left">Payment Status</th>
-            <th className="px-4 py-2 text-left">Order Status</th>
-            <th className="px-4 py-2 text-center">Actions</th>
+            <th className="px-1 py-1 md:px-2 md:py-2 text-left">Order ID</th>
+            <th className="px-1 py-1 md:px-2 md:py-2 text-left">User</th>
+            <th className="px-1 py-1 md:px-2 md:py-2 text-left">Total Amount</th>
+            <th className="px-1 py-1 md:px-2 md:py-2 text-left">Payment Status</th>
+            <th className="px-1 py-1 md:px-2 md:py-2 text-left">Order Status</th>
+            <th className="px-1 py-1 md:px-2 md:py-2 text-center">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -25,15 +25,15 @@ const OrderTable = ({ orders, onView, onUpdateStatus, onDelete }) => {
           ) : (
             orders.map((order) => (
               <tr key={order._id} className="border-b">
-                <td className="px-4 py-2">{order._id}</td>
-                <td className="px-4 py-2">{order.user?.username || "—"}</td>
-                <td className="px-4 py-2">₹{order.totalAmount}</td>
-                <td className="px-4 py-2">{order.paymentStatus}</td>
-                <td className="px-4 py-2">{order.orderStatus}</td>
-                <td className="px-4 py-2 text-center space-x-2">
+                <td className="px-1 py-1 md:px-2 md:py-2">{order._id}</td>
+                <td className="px-1 py-1 md:px-2 md:py-2">{order.user?.username || "—"}</td>
+                <td className="px-1 py-1 md:px-2 md:py-2">₹{order.totalAmount}</td>
+                <td className="px-1 py-1 md:px-2 md:py-2">{order.paymentStatus}</td>
+                <td className="px-1 py-1 md:px-2 md:py-2">{order.orderStatus}</td>
+                <td className="px-1 py-1 md:px-2 md:py-2 text-center space-x-2">
                   <button
                     onClick={() => onView(order)}
-                    className="bg-green-600 text-white px-3 py-1 rounded"
+                    className="bg-green-600 text-white px-3 py-1 rounded mb-1"
                   >
                     View
                   </button>

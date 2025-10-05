@@ -108,6 +108,33 @@ function SellerDashboard() {
     }
   };
 
+{/*Screen version */}
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 1024); // mobile & tablet
+    };
+
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+   if (isMobile) {
+    return (
+      <div className="flex items-center justify-center h-full bg-gray-100 text-center p-4">
+        <div>
+          <h1 className="text-2xl font-bold mb-2">⚠️ Desktop Only</h1>
+          <p className="text-gray-600">
+            The Seller Dashboard is only accessible on desktop devices.  
+            Please use a larger screen to continue.
+          </p>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Seller Dashboard</h1>
@@ -133,7 +160,7 @@ function SellerDashboard() {
       <div className="mb-6 flex justify-end">
         <button
           onClick={() => setShowModal(true)}
-          className="bg-white dark:bg-gray-800 text-slate-900 accent-blue-600 dark:accent-blue-600 dark:text-gray-100 px-4 py-2 rounded cursor-pointer"
+          className="bg-white dark:bg-gray-800 text-slate-900 accent-blue-600 dark:accent-blue-600 dark:text-gray-100 px-1 py-1 md:px-2 md:py-2 rounded cursor-pointer"
         >
           Add Product
         </button>
@@ -214,7 +241,7 @@ function SellerDashboard() {
                 {categories.map((c) => <option key={c._id} value={c._id}>{c.title}</option>)}
               </select>
           </div>    <div className="flex justify-end mt-2">
-                <button type="submit" className="bg-primary cursor-pointer text-white px-4 py-2 rounded">
+                <button type="submit" className="bg-primary cursor-pointer text-white px-1 py-1 md:px-2 md:py-2 rounded">
                   {form.id ? "Update Product" : "Add Product"}
                 </button>
               </div>

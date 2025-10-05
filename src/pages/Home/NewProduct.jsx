@@ -68,7 +68,7 @@ function NewProduct() {
       {/* Prev Button */}
       <button
         onClick={scrollPrev}
-        className="absolute -left-12 top-1/2 -translate-y-1/2 bg-white shadow-md border rounded-full p-2 hover:bg-gray-100 z-10"
+        className="absolute left-4 md:-left-12 top-1/2 -translate-y-1/2 bg-white shadow-md border rounded-full p-2 hover:bg-gray-100 z-10"
       >
         <ChevronLeft size={24} />
       </button>
@@ -80,7 +80,7 @@ function NewProduct() {
             products.map((product) => (
               <div
                 key={product._id}
-                className="w-80 flex-shrink-0 bg-white border border-gray-200 hover:border-blue-200 rounded-lg shadow hover:shadow-lg transition"
+                className="w-72 md:w-80 flex-shrink-0 bg-white border border-gray-200 hover:border-blue-200 rounded-lg shadow hover:shadow-lg transition"
               >
                 <Link to={`/product/${product._id}`}>
                   <img
@@ -114,7 +114,7 @@ function NewProduct() {
               </div>
             ))
           ) : (
-            <p className="px-4 py-2 text-gray-500 text-center">No products found</p>
+            <p className="px-1 py-1 md:px-2 md:py-2 text-gray-500 text-center">No products found</p>
           )}
         </div>
       </div>
@@ -122,7 +122,7 @@ function NewProduct() {
       {/* Next Button */}
       <button
         onClick={scrollNext}
-        className="absolute -right-8 top-1/2 -translate-y-1/2 bg-white shadow-md border rounded-full p-2 hover:bg-gray-100 z-10"
+        className="absolute right-8 md:-right-8 top-1/2 -translate-y-1/2 bg-white shadow-md border rounded-full p-2 hover:bg-gray-100 z-10"
       >
         <ChevronRight size={24} />
       </button>

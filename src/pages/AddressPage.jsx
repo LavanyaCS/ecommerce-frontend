@@ -206,7 +206,7 @@ function AddressPage() {
         <div className="col-span-2 flex gap-2">
           <button
             type="submit"
-            className="cursor-pointer px-4 py-2 shadow bg-white text-slate-900 accent-blue-600 dark:bg-gray-800 dark:text-gray-100 dark:accent-blue-600 rounded flex-1"
+            className="cursor-pointer px-1 py-1 md:px-2 md:py-2 shadow bg-white text-slate-900 accent-blue-600 dark:bg-gray-800 dark:text-gray-100 dark:accent-blue-600 rounded flex-1"
           >
             {editingId ? "Update Address" : "Add Address"}
           </button>
@@ -243,7 +243,7 @@ function AddressPage() {
                   </span>
                 )}
               </div>
-              <div className="flex flex-row items-end gap-2">
+              <div className="flex flex-col md:flex-row items-end gap-2">
                 {!addr.isDefault && (
                   <button
                     onClick={() => setDefault(addr._id)}

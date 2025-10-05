@@ -38,7 +38,7 @@ function OrderPage() {
   return (
     <div className="max-w-5xl mx-auto p-6 space-y-6">
       <h2 className="text-2xl font-bold">My Orders</h2>
-<div className="grid grid-cols-2 gap-4">
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {orders.map((order) => (
         <div key={order._id} className="border rounded p-4 space-y-2 shadow-sm">
           <div className="flex justify-between">
@@ -78,8 +78,8 @@ function OrderPage() {
 
           <div className="flex justify-between items-center mt-2">
             <span>Payment Method: {order.paymentMethod}</span>
-            <Link to={`/order/${order._id}`} className="cursor-pointer px-4 py-2 rounded shadow bg-white text-slate-900 accent-blue-600 dark:bg-gray-800 dark:text-gray-100 dark:accent-blue-600">
-  View Details
+            <Link to={`/order/${order._id}`} className="cursor-pointer px-1 py-1 md:px-2 md:py-2 rounded shadow bg-white text-slate-900 accent-blue-600 dark:bg-gray-800 dark:text-gray-100 dark:accent-blue-600">
+  View <span className="hidden md:inline">Details</span>
 </Link>
 
           </div>

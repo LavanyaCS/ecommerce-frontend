@@ -137,7 +137,7 @@ const [wishlistCount, setWishlistCount] = useState(0);
   },[token]);
   return (
     <header className="relative">
-      <nav className="border-y border-gray-100">
+      <nav className="border-y border-gray-200">
         {/* Main Header */}
         <div className="flex justify-between items-center bg-white dark:bg-gray-800 text-slate-900 accent-blue-600 dark:accent-blue-600 dark:text-gray-100 px-4 md:px-16 h-20">
           <div>
@@ -160,10 +160,10 @@ const [wishlistCount, setWishlistCount] = useState(0);
                   <UserCircle size={24} /> Hi {username}
                 </span>
                 <div className="absolute top-full right-0 z-10 bg-white text-gray-900 border shadow-md rounded-md w-40 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
-                  <Link to="/account" className="block px-4 py-2 hover:bg-gray-100 text-sm">My Account</Link>
-                  <Link to="/myorders" className="block px-4 py-2 hover:bg-gray-100 text-sm">My Orders</Link>
-                  <Link to="/account/addresses" className="block px-4 py-2 hover:bg-gray-100 text-sm">Saved Addresses</Link>
-                  <button onClick={handleLogout} className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-sm">Logout</button>
+                  <Link to="/account" className="block px-1 py-1 md:px-2 md:py-2 hover:bg-gray-100 text-sm">My Account</Link>
+                  <Link to="/myorders" className="block px-1 py-1 md:px-2 md:py-2 hover:bg-gray-100 text-sm">My Orders</Link>
+                  <Link to="/account/addresses" className="block px-1 py-1 md:px-2 md:py-2 hover:bg-gray-100 text-sm">Saved Addresses</Link>
+                  <button onClick={handleLogout} className="block w-full text-left px-1 py-1 md:px-2 md:py-2 hover:bg-gray-100 text-sm">Logout</button>
                 </div>
               </div>
             ) : (
@@ -174,7 +174,7 @@ const [wishlistCount, setWishlistCount] = useState(0);
             )}
 
       {/* Wishlist Icon */}
-      <div className="border border-gray-200 dark:border-gray-700 rounded-sm p-2">
+      <div className="border border-gray-200 rounded-sm p-2">
         <Link to="/my-wishlist" className="relative">
           <Heart
             size={20}
@@ -200,7 +200,7 @@ const [wishlistCount, setWishlistCount] = useState(0);
       </div>
 
       {/* Cart Icon */}
-      <div className="border border-gray-200 dark:border-gray-700 rounded-sm p-2">
+      <div className="border border-gray-200 rounded-sm p-2">
         <Link to="/cart" className="relative">
           <ShoppingBasket
             size={20}
@@ -228,9 +228,10 @@ const [wishlistCount, setWishlistCount] = useState(0);
     <div>
      <button
       onClick={toggleTheme}
-      className="z-50 px-4 py-2 text-sm text-black bg-white rounded-lg bottom-4 left-4 dark:bg-gray-800 dark:text-white border border-gray-100"
+      className="z-50 px-2 h-10 py-1 md:px-2 md:py-2 text-sm text-black bg-white rounded-lg bottom-4 left-4 dark:bg-gray-800 dark:text-white border border-gray-200"
     >
-      {isDark ? '☀️ Light' : '🌙 Dark'}
+      <span className="hidden md:inline">{isDark ? '☀️ Light' : '🌙 Dark'}</span>
+      <span className="inline md:hidden">{isDark ? '☀️' : '🌙'}</span>
     </button></div>
 
             {/* Mobile Hamburger */}
@@ -253,6 +254,9 @@ const [wishlistCount, setWishlistCount] = useState(0);
                 <span className="flex items-center gap-2 font-bold mt-2">
                   <UserCircle size={20} /> Hi {username}
                 </span>
+                  <Link to="/account" className="text-left  mt-2">My Account</Link>
+                  <Link to="/myorders" className="text-left  mt-2">My Orders</Link>
+                  <Link to="/account/addresses" className="text-left  mt-2">Saved Addresses</Link>
                 <button onClick={handleLogout} className="text-left  mt-2">Logout</button>
               </>
             ) : (

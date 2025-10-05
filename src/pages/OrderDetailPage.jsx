@@ -37,7 +37,7 @@ function OrderDetailPage() {
   return (
     <div className="max-w-5xl mx-auto p-6 space-y-6">
       <h2 className="text-2xl font-bold mb-4">Order Details</h2>
-<div className="grid grid-cols-2 gap-4">
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
      
     {/* Order Items */}
       <div className="col-span-2 border rounded p-4 space-y-2 shadow-sm">
@@ -58,7 +58,7 @@ function OrderDetailPage() {
       </div>
    
    {/* Order Info */}
-      <div className="border rounded p-4 space-y-2 shadow-sm min-h-40">
+      <div className="col-span-2 md:col-span-1 border rounded p-4 space-y-2 shadow-sm min-h-40">
         <div className="flex justify-between">
           <h3 className="font-semibold">Order ID: {order._id}</h3>
           <span className={`px-2 py-1 rounded ${
@@ -74,7 +74,7 @@ function OrderDetailPage() {
         <p>Payment Status: {order.paymentStatus}</p>
         <p>Payment Method: {order.paymentMethod}</p>
       </div>  {/* Shipping Address */}
-      <div className="border rounded p-4 space-y-1 shadow-sm min-h-40">
+      <div className="col-span-2 md:col-span-1 border rounded p-4 space-y-1 shadow-sm min-h-40">
         <h3 className="font-semibold">Shipping Address</h3>
         <p>{order.shippingAddress?.label || order.shippingAddress?.name}</p>
         <p>{order.shippingAddress?.street || order.shippingAddress?.address}, {order.shippingAddress?.city}, {order.shippingAddress?.state} - {order.shippingAddress?.zip}</p>

@@ -41,17 +41,17 @@ function ContactUs() {
     <div className="max-w-xl mx-auto p-6 sm:px-6">
       <Toaster position="top-right" />
       <h1 className="text-3xl font-bold text-gray-600 mb-2 text-center">Contact Us</h1>
-      <p className="text-gray-500 mb-6 text-center">
+      <p className="text-gray-500 mb-4 text-center">
         Fill the form below and we will get back to you shortly.
       </p>
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-3">
         <input
           type="text"
           name="name"
           placeholder="Your Name"
           value={formData.name}
           onChange={handleChange}
-          className="w-full px-4 py-2 border rounded-lg"
+          className="w-full px-1 py-1 md:px-2 md:py-2 border rounded-lg"
           required
         />
         <input
@@ -60,7 +60,7 @@ function ContactUs() {
           placeholder="Your Email"
           value={formData.email}
           onChange={handleChange}
-          className="w-full px-4 py-2 border rounded-lg"
+          className="w-full px-1 py-1 md:px-2 md:py-2 border rounded-lg"
           required
         />
         <input
@@ -69,7 +69,7 @@ function ContactUs() {
           placeholder="Subject"
           value={formData.subject}
           onChange={handleChange}
-          className="w-full px-4 py-2 border rounded-lg"
+          className="w-full px-1 py-1 md:px-2 md:py-2 border rounded-lg"
           required
         />
         <textarea
@@ -77,14 +77,14 @@ function ContactUs() {
           placeholder="Message"
           value={formData.message}
           onChange={handleChange}
-          rows="5"
-          className="w-full px-4 py-2 border rounded-lg"
+          rows="4"
+          className="w-full px-1 py-1 md:px-2 md:py-2 border rounded-lg"
           required
         />
         <button
           type="submit"
           disabled={loading}
-          className="ml-auto px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-900 disabled:opacity-50"
+          className="ml-auto px-1 py-1 md:px-2 md:py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-900 disabled:opacity-50"
         >
           {loading ? "Sending..." : "Send Message"}
         </button>
