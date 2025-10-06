@@ -82,6 +82,8 @@ function Header() {
     <>
       <Link to="/" className="hover:text-blue-600 dark:hover:text-blue-400">Home</Link>
       <Link to="/product" className="hover:text-blue-600 dark:hover:text-blue-400">Product</Link>
+      <Link to="/about" className="hover:text-blue-600 dark:hover:text-blue-400">About Us</Link>
+      <Link to="/contact" className="hover:text-blue-600 dark:hover:text-blue-400">Contact</Link>
     {userRole === "admin" && (
   <Link to="/admin/dashboard" className="hover:text-blue-600 dark:hover:text-blue-400">
     Admin Panel
