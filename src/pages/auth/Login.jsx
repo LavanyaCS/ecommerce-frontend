@@ -67,7 +67,7 @@ else navigate("/");
             </span>
           </div>
           <div>
-            <button type="submit" disabled={loading} className="cursor-pointer w-full py-2 text-white bg-gray-800 rounded-lg hover:bg-rose-900">
+            <button type="submit" disabled={loading} className="cursor-pointer w-full py-2 text-white bg-gray-800 rounded-lg hover:bg-gray-900">
               {loading ? "Logging in..." : "Login"}
             </button>
           </div>
