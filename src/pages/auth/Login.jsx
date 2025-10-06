@@ -2,10 +2,10 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 import { Eye, EyeOff } from 'lucide-react'
 import React from 'react'
-import { baseUrl } from '../../api';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import {jwtDecode} from 'jwt-decode';
+import { baseUrl } from '../../api';
 
 function Login() {
   const [loginForm, setloginForm] = useState({
