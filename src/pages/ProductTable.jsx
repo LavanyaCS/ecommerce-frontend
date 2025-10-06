@@ -7,7 +7,7 @@ const ProductTable = ({ products, onEdit, onDelete, onAdd }) => {
         <h2 className="font-semibold">Product List</h2>
         <button
           onClick={onAdd}
-          className="bg-indigo-500 text-white px-3 py-1 rounded"
+          className="bg-gray-800 text-white px-3 py-1 rounded"
         >
           + Add Product
         </button>

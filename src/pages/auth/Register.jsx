@@ -76,7 +76,7 @@ function Register() {
               <option value="buyer">User</option></select>
           </div>
           <div>
-            <button type="submit" disabled={loading} className="cursor-pointer w-full py-2 text-white bg-primary rounded-lg hover:bg-rose-900">
+            <button type="submit" disabled={loading} className="cursor-pointer w-full py-2 text-white bg-gray-800 rounded-lg hover:bg-gray-900">
               {loading ? "Registering..." : "Register"}
             </button>
           </div>

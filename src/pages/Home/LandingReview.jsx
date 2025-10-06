@@ -8,7 +8,7 @@ function LandingReview() {
   const [reviews, setReviews] = useState([]);
   const sliderRef = useRef(null);
 
-  // ✅ Fetch all reviews
+  //Fetch all reviews
   const fetchReviews = async () => {
     try {
       const res = await axios.get(`${baseUrl}/review/all`);

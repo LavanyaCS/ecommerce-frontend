@@ -93,7 +93,7 @@ const ProductModal = ({
         
           <button
             onClick={onSave}
-            className="bg-primary cursor-pointer  text-white p-2 rounded w-fit"
+            className="bg-gray-800 cursor-pointer  text-white p-2 rounded w-fit"
           >
             Save
           </button>

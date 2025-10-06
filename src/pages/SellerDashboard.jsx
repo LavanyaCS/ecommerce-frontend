@@ -241,7 +241,7 @@ function SellerDashboard() {
                 {categories.map((c) => <option key={c._id} value={c._id}>{c.title}</option>)}
               </select>
           </div>    <div className="flex justify-end mt-2">
-                <button type="submit" className="bg-primary cursor-pointer text-white px-1 py-1 md:px-2 md:py-2 rounded">
+                <button type="submit" className="bg-gray-800 cursor-pointer text-white px-1 py-1 md:px-2 md:py-2 rounded">
                   {form.id ? "Update Product" : "Add Product"}
                 </button>
               </div>

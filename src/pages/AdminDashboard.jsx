@@ -9,9 +9,10 @@ import CategoryModal from "./CategoryModal";
 import ProductModal from "./ProductModal";
 import OrderModal from "./OrderModal";
 
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer , PieChart, Pie, Cell, Legend } from "recharts";
 import { ChevronDown, ChevronRight } from "lucide-react";
 
+const COLORS = ["#4f46e5", "#f97316", "#10b981"]; 
 function AdminDashboard() {
   /** State **/
   const [categories, setCategories] = useState([]);
@@ -93,16 +94,25 @@ function AdminDashboard() {
       toast.error("Failed to fetch orders");
     }
   };
+const fetchDashboardStats = async () => {
+  try {
+    const res = await axios.get(`${baseUrl}/admin/dashboard`, axiosConfig);
+    const data = res.data;
 
-  const fetchDashboardStats = async () => {
-    try {
-      const res = await axios.get(`${baseUrl}/admin/dashboard`, axiosConfig);
-      console.log(res.data);
-      setDashboardStats(res.data);
-    } catch {
-      toast.error("Failed to fetch dashboard stats");
-    }
-  };
+    // Prepare user count chart for donut
+    const userRoleData = [
+      { name: "Buyer", value: data.totalUsers || 0 },
+      { name: "Seller", value: data.totalSellers || 0 },
+      { name: "Admin", value: data.totalAdmins || 0 }
+    ];
+
+    setDashboardStats({ ...data, userRoleData });
+  } catch {
+    toast.error("Failed to fetch dashboard stats");
+  }
+};
+
+
 
   /** Charts **/
   const generateCategoryChart = (productsList) => {
@@ -235,10 +245,30 @@ function AdminDashboard() {
           </ResponsiveContainer>
         </div>
         <div className="bg-white p-4 rounded shadow">
-          <h2 className="text-lg font-semibold mb-4">Products per Seller</h2>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={dashboardStats.productsPerSeller}><XAxis dataKey="sellerName" /><YAxis allowDecimals={false} /><Tooltip /><Bar dataKey="count" fill="#f97316" /></BarChart>
-          </ResponsiveContainer>
+ <h2 className="text-lg font-semibold mb-4">Users by Role</h2>
+  <ResponsiveContainer width="100%" height={300}>
+  <PieChart>
+  <Pie
+    data={dashboardStats.userRoleData || []} // <-- safe fallback
+    dataKey="value"
+    nameKey="name"
+    cx="50%"
+    cy="50%"
+    innerRadius={60}
+    outerRadius={100}
+    fill="#8884d8"
+    label
+  >
+    {(dashboardStats.userRoleData || []).map((entry, index) => (
+      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+    ))}
+  </Pie>
+  <Tooltip />
+  <Legend verticalAlign="bottom" height={36} />
+</PieChart>
+
+  </ResponsiveContainer>
+
         </div>
       </div>
 
@@ -271,7 +301,7 @@ function AdminDashboard() {
           <div className="p-4 border-t">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-semibold">Product List</h2>
-              <button onClick={handleAddProduct} className="bg-indigo-600 text-white px-1 py-1 md:px-2 md:py-2 rounded">+ Add Product</button>
+              <button onClick={handleAddProduct} className="bg-gray-800 text-white px-1 py-1 md:px-2 md:py-2 rounded">+ Add Product</button>
             </div>
             <table className="min-w-full">
               <thead>

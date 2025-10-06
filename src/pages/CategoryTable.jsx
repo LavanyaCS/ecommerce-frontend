@@ -7,7 +7,7 @@ const CategoryTable = ({ categories, onEdit, onDelete, onAdd }) => {
         <h2 className="font-semibold">Category List</h2>
         <button
           onClick={onAdd}
-          className="bg-blue-500 text-white px-3 py-1 rounded"
+          className="bg-gray-800 text-white px-3 py-1 rounded"
         >
           + Add Category
         </button>

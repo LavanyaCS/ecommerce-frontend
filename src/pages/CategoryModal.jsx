@@ -75,7 +75,7 @@ const CategoryModal = ({ onClose, onSuccess, category }) => {
 
             <button
               type="submit"
-              className="bg-primary cursor-pointer  text-white p-2 rounded"
+              className="bg-gray-800 cursor-pointer  text-white p-2 rounded"
             >
               {category ? "Update" : "Add"}
               

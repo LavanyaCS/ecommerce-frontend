@@ -5,7 +5,8 @@ import { baseUrl } from "../api";
 import { Heart, ShoppingBasket, Menu, X, UserCircle } from "lucide-react";
 import { jwtDecode } from "jwt-decode";
 import toast from "react-hot-toast";
-
+import liyaraLogoDark from "../assets/images/liyara-logo-white.png";
+import liyaraLogo from "../assets/images/liyara-logo.png";
 function Header() {
   const [categories, setCategories] = useState([]);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -143,7 +144,11 @@ const [wishlistCount, setWishlistCount] = useState(0);
           <div>
             <h1 className="font-semibold text-2xl">
                <Link to="/">
-              <span className="text-gray-800 dark:text-white  font-bold border border-gray-200 px-3 mr-1">L</span>iyara
+                <img
+  src={isDark ? liyaraLogoDark : liyaraLogo}
+  alt="Liyara Logo"
+  className="w-28 h-8 inline-block mr-2"
+/>
 </Link>            </h1>
           </div>
 
