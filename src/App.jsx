@@ -21,6 +21,7 @@ import Footer from './pages/Footer'
 import AboutUs from './pages/AboutUs'
 import { Contact } from 'lucide-react'
 import ContactUs from './pages/ContactUs'
+import NotFound from './pages/NotFound'
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
   <Route path="/myorders" element={<OrderPage />} />
   <Route path="/about" element={<AboutUs />} />
   <Route path="/contact" element={<ContactUs />} />
+  <Route path="*" element={<NotFound />} />
 
 
       </Routes>
