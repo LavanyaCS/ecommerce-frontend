@@ -76,6 +76,7 @@ function CartPage() {
 
   const cartItems = cart.items.filter((item) => item.product);
 
+  if (!token) return <p className="p-6">Please log in to view your cart.</p>;
   return (
     <div className="max-w-5xl mx-auto p-6 space-y-6">
       <h2 className="text-2xl font-bold">Your Cart</h2>
