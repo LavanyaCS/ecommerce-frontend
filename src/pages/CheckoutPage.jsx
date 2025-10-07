@@ -228,7 +228,13 @@ function CheckoutPage() {
 
           {/* Place Order for COD */}
           {paymentMethod === "COD" && <button onClick={placeOrder} className="bg-white dark:bg-gray-800 text-slate-900 accent-blue-600 dark:accent-blue-600 dark:text-gray-100 px-6 py-2 rounded shadow">Place Order</button>}
+<p>Note:Payment Method is Stripe</p>
 
+    <p>Dummy Card Details</p>
+    <p className="card-number">4242 4242 4242 4242</p>
+    <p>Validity:12/34</p>
+    <p>cvc 123</p>
+    <p>ZIP: any (e.g. 560001)</p>
         </div>
       </div>
 
