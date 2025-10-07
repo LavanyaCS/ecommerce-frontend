@@ -50,7 +50,7 @@ function AboutUs() {
           Join us on our journey and discover what makes Liyara unique.
         </p>
         <button className="px-6 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-900">
-          Explore Products
+          <Link to="/product"> Explore Products</Link>
         </button>
       </section>
     </div>
