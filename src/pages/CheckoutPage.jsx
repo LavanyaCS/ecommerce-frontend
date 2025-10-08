@@ -60,13 +60,13 @@ function CheckoutPage() {
 
   const [cart, setCart] = useState(null);
   const [addresses, setAddresses] = useState([]);
-  const [shippingAddress, setShippingAddress] = useState({
-  label: "",
+ const [shippingAddress, setShippingAddress] = useState({
+  label: "Home",
   street: "",
   city: "",
   state: "",
   zip: "",
-  phone: "",
+  country: "India",
 });
   const [selectedAddressId, setSelectedAddressId] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState("COD");
@@ -135,14 +135,26 @@ function CheckoutPage() {
 
     let shippingId = selectedAddressId;
 
-    if (addingNew) {
-      for (const key in shippingAddress) if (!shippingAddress[key]) { toast.error("Fill all details"); return; }
-      try {
-        const res = await axios.post(`${baseUrl}/address`, shippingAddress, { headers: { Authorization: `Bearer ${token}` } });
-        shippingId = res.data.address._id;
-      } catch { toast.error("Failed to save address"); return; }
+ 
+if (addingNew) {
+  const requiredFields = ["street", "city", "zip"];
+  for (const field of requiredFields) {
+    if (!shippingAddress[field] || shippingAddress[field].trim() === "") {
+      toast.error(`Please fill the ${field} field`);
+      return;
     }
+  }
 
+  try {
+    const res = await axios.post(`${baseUrl}/address`, shippingAddress, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    shippingId = res.data.address._id;
+  } catch {
+    toast.error("Failed to save address");
+    return;
+  }
+}
     const orderItems = cart.items.map(item => ({
       product: item.product._id,
       quantity: item.quantity,
@@ -210,10 +222,18 @@ function CheckoutPage() {
           {(addingNew || addresses.length === 0) && (
             <div className="border rounded p-4 space-y-2">
               <h3 className="font-semibold">{addresses.length === 0 ? "Add Shipping Address" : "Edit / Add Address"}</h3>
-              {["name", "address", "city", "state", "zip", "phone"].map(field => (
-                <input key={field} type="text" name={field} placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
-                  className="w-full border p-2 rounded" value={shippingAddress[field]} onChange={handleChange} />
-              ))}
+             {["label", "street", "city", "state", "zip"].map(field => (
+  <input
+    key={field}
+    type="text"
+    name={field}
+    placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+    className="w-full border p-2 rounded"
+    value={shippingAddress[field]}
+    onChange={(e) => setShippingAddress({...shippingAddress, [field]: e.target.value})}
+  />
+))}
+
               {addresses.length > 0 && <button className="bg-gray-300 text-black py-2 rounded flex-1 mt-2 p-2" onClick={() => setAddingNew(false)}>Cancel</button>}
             </div>
           )}
