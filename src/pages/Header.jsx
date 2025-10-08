@@ -78,7 +78,7 @@ function Header() {
   }, []);
 
   // Common menu links
-  const menuLinks = (
+ const menuLinks = (
     <>
       <Link to="/" className="hover:text-blue-600 dark:hover:text-blue-400">Home</Link>
       <Link to="/product" className="hover:text-blue-600 dark:hover:text-blue-400">Product</Link>
@@ -235,7 +235,7 @@ const [wishlistCount, setWishlistCount] = useState(0);
     <div>
      <button
       onClick={toggleTheme}
-      className="z-50 px-2 h-10 py-1 md:px-2 md:py-2 text-sm text-black bg-white rounded-lg bottom-4 left-4 dark:bg-gray-800 dark:text-white border border-gray-200"
+      className="z-50 px-2 h-10 py-1 md:px-2 md:py-2 text-sm text-black cursor-pointer  bg-white rounded-lg bottom-4 left-4 dark:bg-gray-800 dark:text-white border border-gray-200"
     >
       <span className="hidden md:inline">{isDark ? '☀️ Light' : '🌙 Dark'}</span>
       <span className="inline md:hidden">{isDark ? '☀️' : '🌙'}</span>
