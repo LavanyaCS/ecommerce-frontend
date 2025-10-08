@@ -41,7 +41,7 @@ function OrderPage() {
 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {orders.map((order) => (
         <div key={order._id} className="border rounded p-4 space-y-2 shadow-sm">
-          <div className="flex justify-between">
+          <div className="flex flex-row md:flex-col justify-between">
             <h3 className="font-semibold">Order ID: {order._id}</h3>
             <span className={`px-2 py-1 rounded ${
               order.orderStatus === "delivered" ? "bg-green-100 text-green-800" :
