@@ -60,7 +60,14 @@ function CheckoutPage() {
 
   const [cart, setCart] = useState(null);
   const [addresses, setAddresses] = useState([]);
-  const [shippingAddress, setShippingAddress] = useState({ name: "", address: "", city: "", state: "", zip: "", phone: "" });
+  const [shippingAddress, setShippingAddress] = useState({
+  label: "",
+  street: "",
+  city: "",
+  state: "",
+  zip: "",
+  phone: "",
+});
   const [selectedAddressId, setSelectedAddressId] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState("COD");
   const [addingNew, setAddingNew] = useState(false);
