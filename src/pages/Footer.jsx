@@ -9,7 +9,7 @@ function Footer() {
       <div className="text-center text-sm flex justify-start">
         <p>© {new Date().getFullYear()} Liyara. All rights reserved.</p>
       </div>
-            <ul className="space-x-2 text-sm flex justify-end">
+            <ul className="space-x-2 text-sm hidden md:flex justify-end">
             <li><a href="/" className="hover:text-white inline-block">Home</a></li>
             <li><a href="/product" className="inline-block hover:text-white">Product</a></li>
             <li><a href="/about" className="inline-block hover:text-white">About Us</a></li>
